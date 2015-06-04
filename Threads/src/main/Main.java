@@ -9,6 +9,7 @@ public class Main {
 		//t.testGetAllLyrics();
 		//t.testpickLine();
 		//t.testSingWithDelay();
-		t.testSingWithTimer();
+		//t.testSingWithTimer();
+		t.testSingWithThread();
 	}
 }

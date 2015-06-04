@@ -1,15 +1,17 @@
 package music;
 
-public class Singer {
+public class Singer extends Thread{
 
-	private String name;
+	private String name1;
 	private Voice voice;
 	private Performance performance;
-	public String getName() {
-		return name;
+	private boolean stop;
+	private Synchronize synch;
+	public String getName1() {
+		return name1;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName1(String name) {
+		this.name1 = name;
 	}
 	public Voice getVoice() {
 		return voice;
@@ -25,7 +27,7 @@ public class Singer {
 	}
 	public Singer(String name, Voice voice, Performance performance) {
 		super();
-		this.name = name;
+		this.name1 = name;
 		this.voice = voice;
 		this.performance = performance;
 	}
@@ -75,6 +77,51 @@ public class Singer {
 		}
 		
 	}
+	private void sing(){
+		Song song = this.performance.getSong();
+		long delay = this.performance.getDelay();
+		
+		int i = 0;
+		String line = null;
+		while(!stop){
+			if(this.voice == Voice.LEAD){
+				line = song.getLyrics().get(i% song.getLyrics().size());
+				synch.singLeadLine(line, delay);
+			};
+            if(this.voice == Voice.BACKNIG){
+				line = '\t'+song.getLyrics().get(i% song.getLyrics().size()+1);
+				synch.singBackLine(line, delay);
+			};
+			
+		i+=2;	
+		}
+	}
+	public void run(){
+		sing();
+		
+	}
+	public boolean isStop() {
+		return stop;
+	}
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
+	public Singer(String name1, Voice voice, Performance performance,
+			boolean stop, Synchronize synch) {
+		super();
+		this.name1 = name1;
+		this.voice = voice;
+		this.performance = performance;
+		this.stop = stop;
+		this.synch = synch;
+	}
+	public Synchronize getSynch() {
+		return synch;
+	}
+	public void setSynch(Synchronize synch) {
+		this.synch = synch;
+	}
 	
 	
 }
+

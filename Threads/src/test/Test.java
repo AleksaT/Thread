@@ -8,6 +8,7 @@ import java.util.Timer;
 import music.Performance;
 import music.Singer;
 import music.Song;
+import music.Synchronize;
 import music.Voice;
 
 public class Test {
@@ -20,6 +21,9 @@ public class Test {
   
   private Singer bbk;
   private Singer bono;
+  
+  private Synchronize synch;
+  
   private void initialize(){
 	  lyrics = new ArrayList<String>();
 	  lyrics.add("When love comes to town I'am gona jump that train");
@@ -29,8 +33,12 @@ public class Test {
 	  
 	  love = new Song("When love comes to town", lyrics);
 	  performance = new Performance(love, 1000);
-	  bbk = new Singer("B.B. King", Voice.LEAD, performance);
-	  bono = new Singer("BOno", Voice.BACKNIG, performance);
+	  synch = new Synchronize(true);
+	  //bbk = new Singer("B.B. King", Voice.LEAD, performance);
+	  //bono = new Singer("BOno", Voice.BACKNIG, performance);
+	  
+	  bbk = new Singer("B.B. King", Voice.LEAD, performance,false,synch);
+	  bono = new Singer("BOno", Voice.BACKNIG, performance,false,synch);
   }
   public void testGetAllLyrics(){
 	  initialize();
@@ -66,5 +74,13 @@ public class Test {
 	  bono.singWithDelay(love, 8);
 	  
   }
-  
+  public void testSingWithThread(){
+	  initialize();
+	  bbk.start();
+	  bono.start();
+	  
+	  IN.nextLine();
+	  bbk.setStop(true);
+	  bono.setStop(true);
+  }
 }
