@@ -42,7 +42,7 @@ public class Singer extends Thread{
 			System.out.println(song.getLyrics().get(i% song.getLyrics().size()));
 			
 			}else {
-				if (this.voice == Voice.BACKNIG){
+				if (this.voice == Voice.BACKING){
 					System.out.println(song.getLyrics().get(i% song.getLyrics().size())+1);	
 				}
 				
@@ -63,7 +63,7 @@ public class Singer extends Thread{
 			System.out.println(song.getLyrics().get(i% song.getLyrics().size()));
 			
 			}else {
-				if (this.voice == Voice.BACKNIG){
+				if (this.voice == Voice.BACKING){
 					try {
 						wait(1000);
 					} catch (InterruptedException e) {
@@ -88,10 +88,14 @@ public class Singer extends Thread{
 				line = song.getLyrics().get(i% song.getLyrics().size());
 				synch.singLeadLine(line, delay);
 			};
-            if(this.voice == Voice.BACKNIG){
+            if(this.voice == Voice.BACKING){
 				line = '\t'+song.getLyrics().get(i% song.getLyrics().size()+1);
 				synch.singBackLine(line, delay);
 			};
+			if(this.voice == Voice.GUITAR){
+				line = '\t'+"         " + "----------GUITAR SOLO----------"	;
+				synch.playGuitarSolo(line, delay);
+			}
 			
 		i+=2;	
 		}

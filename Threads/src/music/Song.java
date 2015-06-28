@@ -34,10 +34,8 @@ public class Song {
 		if(voice == Voice.ALL){
 			return getAllLyrics();
 		}
-		/*
-		 * dodati ili
-		 */
-		if((voice == Voice.LEAD) && (voice == Voice.LEAD)){
+		
+		if((voice == Voice.LEAD) || (voice == Voice.BACKING) || (voice == Voice.GUITAR)){
 			return this.lyrics.get(noOfLine);
 		}
 		return null;

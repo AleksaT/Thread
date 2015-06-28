@@ -21,6 +21,7 @@ public class Test {
   
   private Singer bbk;
   private Singer bono;
+  private Singer guitar;
   
   private Synchronize synch;
   
@@ -28,17 +29,18 @@ public class Test {
 	  lyrics = new ArrayList<String>();
 	  lyrics.add("When love comes to town I'am gona jump that train");
 	  lyrics.add("When love comes to town I'am gona catch that flame");
-	  lyrics.add("When love comes to town I'am gona jump that train");
-	  lyrics.add("When love comes to town I'am gona jump that train");
+	  lyrics.add("Maybe I was wrong to ever let you down");
+	  lyrics.add("But I did what I did before love came to town.");
 	  
 	  love = new Song("When love comes to town", lyrics);
 	  performance = new Performance(love, 1000);
-	  synch = new Synchronize(true);
+	  synch = new Synchronize(true,false);
 	  //bbk = new Singer("B.B. King", Voice.LEAD, performance);
 	  //bono = new Singer("BOno", Voice.BACKNIG, performance);
 	  
 	  bbk = new Singer("B.B. King", Voice.LEAD, performance,false,synch);
-	  bono = new Singer("BOno", Voice.BACKNIG, performance,false,synch);
+	  bono = new Singer("BOno", Voice.BACKING, performance,false,synch);
+	  guitar = new Singer("guitar", Voice.GUITAR,performance,false, synch);
   }
   public void testGetAllLyrics(){
 	  initialize();
@@ -78,9 +80,20 @@ public class Test {
 	  initialize();
 	  bbk.start();
 	  bono.start();
+	  guitar.start();
 	  
 	  IN.nextLine();
 	  bbk.setStop(true);
 	  bono.setStop(true);
+	  guitar.setStop(true);
+  }
+  
+  public void testSingWithThreadGuitar(){
+	  
+	  
+	  
+	  
+	  
+	  
   }
 }

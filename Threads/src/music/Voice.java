@@ -4,5 +4,6 @@ public enum Voice {
 
 	ALL,
 	LEAD,
-	BACKNIG
+	BACKING,
+	GUITAR;
 }
