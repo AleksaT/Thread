@@ -1,5 +1,7 @@
 package music;
 
+import javax.swing.JTextArea;
+
 public class Synchronize {
 
 	private boolean leadVoiceFlag ;
@@ -10,7 +12,7 @@ public class Synchronize {
 		this.leadVoiceFlag = leadVoiceFlag;
 		this.guitarSoloFlag = guitarSoloFlag;
 	}
-	public synchronized void singLeadLine(String line, long delay){
+	public synchronized void singLeadLine(String line, long delay,JTextArea area){
 		
 		while(!leadVoiceFlag){
 			try {
@@ -20,9 +22,9 @@ public class Synchronize {
 				e.printStackTrace();
 			}
 		}
-		singOneLine(line,delay);
+		singOneLine(line,delay,area);
 	}
-	private void singOneLine(String line, long delay){
+	private void singOneLine(String line, long delay,JTextArea area){
 		
 		try {
 			wait(delay);
@@ -30,13 +32,13 @@ public class Synchronize {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(line);
+		 area.append(line +'\n');
 		leadVoiceFlag= false;
 		guitarSoloFlag = true;
 		
 		notifyAll();
 	}
-public synchronized void singBackLine(String line, long delay){
+public synchronized void singBackLine(String line, long delay,JTextArea area){
 		
 		while(!guitarSoloFlag){
 			try {
@@ -46,10 +48,10 @@ public synchronized void singBackLine(String line, long delay){
 				e.printStackTrace();
 			}
 		}
-		singOneLineBack(line,delay);
+		singOneLineBack(line,delay,area);
 		
 	}
-private void singOneLineBack(String line, long delay){
+private void singOneLineBack(String line, long delay,JTextArea area){
 	
 	try {
 		wait(delay);
@@ -57,13 +59,13 @@ private void singOneLineBack(String line, long delay){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	System.out.println(line);
+	 area.append(line +'\n');
 	leadVoiceFlag= false;
 	guitarSoloFlag = false;
 	notifyAll();
 }
 
-public synchronized void playGuitarSolo (String line, long delay){
+public synchronized void playGuitarSolo (String line, long delay,JTextArea area){
 	
 	while(guitarSoloFlag || leadVoiceFlag){
 		try {
@@ -73,12 +75,12 @@ public synchronized void playGuitarSolo (String line, long delay){
 			e.printStackTrace();
 		}
 	}
-	playGuitarLine(line,delay);
+	playGuitarLine(line,delay,area);
 	
 }
 
 
-private void playGuitarLine(String line, long delay){
+private void playGuitarLine(String line, long delay,JTextArea area){
 	
 	try {
 		wait(delay);
@@ -86,7 +88,7 @@ private void playGuitarLine(String line, long delay){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	System.out.println(line);
+	 area.append(line +'\n');
 	leadVoiceFlag = true;
 	guitarSoloFlag = false;
 	

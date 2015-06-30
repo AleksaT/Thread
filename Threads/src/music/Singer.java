@@ -1,5 +1,9 @@
 package music;
 
+import gui.GUIFrame;
+
+import javax.swing.JTextArea;
+
 public class Singer extends Thread{
 
 	private String name1;
@@ -77,7 +81,7 @@ public class Singer extends Thread{
 		}
 		
 	}
-	private void sing(){
+	private void sing(JTextArea area){
 		Song song = this.performance.getSong();
 		long delay = this.performance.getDelay();
 		
@@ -86,22 +90,22 @@ public class Singer extends Thread{
 		while(!stop){
 			if(this.voice == Voice.LEAD){
 				line = song.getLyrics().get(i% song.getLyrics().size());
-				synch.singLeadLine(line, delay);
+				synch.singLeadLine(line, delay,area);
 			};
             if(this.voice == Voice.BACKING){
 				line = '\t'+song.getLyrics().get(i% song.getLyrics().size()+1);
-				synch.singBackLine(line, delay);
+				synch.singBackLine(line, delay,area);
 			};
 			if(this.voice == Voice.GUITAR){
 				line = '\t'+"         " + "----------GUITAR SOLO----------"	;
-				synch.playGuitarSolo(line, delay);
+				synch.playGuitarSolo(line, delay,area);
 			}
 			
 		i+=2;	
 		}
 	}
 	public void run(){
-		sing();
+		sing(GUIFrame.textArea);
 		
 	}
 	public boolean isStop() {

@@ -82,18 +82,12 @@ public class Test {
 	  bono.start();
 	  guitar.start();
 	  
-	  IN.nextLine();
-	  bbk.setStop(true);
-	  bono.setStop(true);
-	  guitar.setStop(true);
+	 
   }
   
-  public void testSingWithThreadGuitar(){
-	  
-	  
-	  
-	  
-	  
-	  
-  }
+ public void stop(){
+	 bbk.setStop(true);
+	 bono.setStop(true);
+	 guitar.setStop(true);
+ }
 }
